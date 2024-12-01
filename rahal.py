@@ -1,6 +1,7 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 import sys
+import user as data
 
 class window(qtw.QTabWidget):
     def __init__(self):
@@ -40,7 +41,16 @@ class window(qtw.QTabWidget):
         self.login_button.setFont(self.font_log)     
         self.login_button.clicked.connect(self.log_def)
     def log_def(self):
-        self.la.setText("True")   
+        user=self.user_box.text()
+        bass=self.pass_box.text()
+        # self.la.setText(user)  
+        if data.Log_in(user,bass):
+            self.la.setText("true")
+            self.la.setStyleSheet("color:green;background:white")
+        else:
+            self.la.setText("false")
+            self.la.setStyleSheet("color:red;background:white")
+        # print(user)
         
 
 app =qtw.QApplication(sys.argv)
