@@ -31,6 +31,7 @@ class window(qtw.QTabWidget):
         self.pass_box.setFont(self.font_log)
         self.pass_box.setGeometry(440 ,285 ,318 ,54 )
         self.pass_box.setStyleSheet("background:#eaeaea;color:#000000; border-radius:15")
+        self.pass_box.setEchoMode(qtw.QLineEdit.Password)
 
         self.login_button=qtw.QPushButton(self)
         self.login_button.setGeometry(482,362,233,54)
