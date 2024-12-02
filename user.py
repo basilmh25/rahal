@@ -14,28 +14,26 @@ cursor.execute("""
     )
 """)
 
-
-def Add_firstname():
-    pass
-
 # Add new user -> use in sign up
 def Add_User(firstname, email, password, lastname = None, phone = None):
-    try:
-        cursor.execute("INSERT INTO users VALUES (? ,? ,?, ?, ?)", (firstname, lastname, email, password, phone))
-    except:
-        print("The Email or Password or user_id is exist")
+    with sqlite3.connect("DataBase.db") as con:
+        cursor = con.cursor()
+        try:
+            cursor.execute("INSERT INTO users (firstname, lastname, email, password, phone) VALUES (? ,? ,?, ?, ?)", 
+                    (firstname, lastname, email, password, phone))
+        except:
+            print("The Email or Password is exist")
+
 
 # Gitting email -> use in log in
 def Log_in(user,password):
-    login = cursor.execute("SELECT firstname, password FROM users")
-    data = login.fetchall()
-    for a in data:
-        if user == a[0]:
-            if password==a[1]:
-                return True
-    return False
-
-
-# print(Log_in('Ahme', 'password123'))
-con.commit()
-# con.close()
+    with sqlite3.connect("DataBase.db") as con:
+        cursor = con.cursor()
+        login = cursor.execute("SELECT email, password FROM users")
+        data = login.fetchall()
+        for a in data:
+            if user == a[0]:
+                if password==a[1]:
+                    return True
+        return False
+    
