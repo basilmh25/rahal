@@ -79,9 +79,25 @@ class signup(qtw.QTabWidget):
         phone=self.phone_box.text()
         password=self.pass_box.text()
         cpassword=self.cpass_box.text()
-
-        self.parent.resize(1600,950)
-        self.parent.setCurrentWidget(self.parent.home_page)
+        if(len(fname) > 0):
+            if (len(lname) > 0):
+                if(len(email) > 0 and data.check_email(email)):
+                    if(password == cpassword and len(password) > 0):
+                        if(len(phone) == 11):
+                            data.Add_User(fname, email, password, lname, phone)
+                            self.parent.resize(1600,950)
+                            self.parent.setCurrentWidget(self.parent.home_page)
+                        
+                        else:
+                            self.m_wrong("Phone is Empty!!!")
+                    else:
+                        self.m_wrong("Passwort not equal cpassword OR Password is Empty!!!")
+                else:
+                    self.m_wrong("Email is exist OR Email is Empty!!!")
+            else:
+                self.m_wrong("Last Name is Empty!!!")        
+        else:
+            self.m_wrong("First name is Empty!!!")
     
     def m_wrong(self,text):
         self.wrong_message.setText(text)
