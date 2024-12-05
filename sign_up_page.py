@@ -64,10 +64,24 @@ class signup(qtw.QTabWidget):
         self.login_button.setStyleSheet("background:white;color:#0855ff;border-radius:16")
         self.login_button.clicked.connect(self.login_def)
 
+        self.wrong_message=qtw.QLabel(self)
+        self.wrong_message.move(60,159)
+        self.wrong_message.setFont(self.fontbox)
+
     def login_def(self):
         self.parent.resize(800,600)
         self.parent.setCurrentWidget(self.parent.login_page)
         
     def register_def(self):
+        fname=self.fname_box.text()
+        lname=self.lname_box.text()
+        email=self.email_box.text()
+        phone=self.phone_box.text()
+        password=self.pass_box.text()
+        cpassword=self.cpass_box.text()
+
         self.parent.resize(1600,950)
         self.parent.setCurrentWidget(self.parent.home_page)
+    
+    def m_wrong(self,text):
+        self.wrong_message.setText(text)
