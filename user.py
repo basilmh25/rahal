@@ -31,9 +31,13 @@ def Log_in(user,password):
         cursor = con.cursor()
         login = cursor.execute("SELECT email, password FROM users")
         data = login.fetchall()
+        # print(data)
         for a in data:
             if user == a[0]:
                 if password==a[1]:
                     return True
         return False
     
+# login = cursor.execute("SELECT email, password FROM users")
+# data = login.fetchall()
+# print(data)
