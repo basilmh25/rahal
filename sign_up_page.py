@@ -67,6 +67,8 @@ class signup(qtw.QTabWidget):
         self.wrong_message=qtw.QLabel(self)
         self.wrong_message.move(60,159)
         self.wrong_message.setFont(self.fontbox)
+        self.wrong_message.setText("                                                        ")
+        self.wrong_message.setStyleSheet("color:red")
 
     def login_def(self):
         self.parent.resize(800,600)
@@ -89,15 +91,15 @@ class signup(qtw.QTabWidget):
                             self.parent.setCurrentWidget(self.parent.home_page)
                         
                         else:
-                            self.m_wrong("Phone is Empty!!!")
+                            self.m_wrong("Phone is Empty!")
                     else:
-                        self.m_wrong("Passwort not equal cpassword OR Password is Empty!!!")
+                        self.m_wrong("password isn't equal!")
                 else:
-                    self.m_wrong("Email is exist OR Email is Empty!!!")
-            else:
-                self.m_wrong("Last Name is Empty!!!")        
+                    self.m_wrong("Email is exist OR Email is Empty!")
+            else:                                                    
+                self.m_wrong("Last Name is Empty!")        
         else:
-            self.m_wrong("First name is Empty!!!")
+            self.m_wrong("First name is Empty!")
     
     def m_wrong(self,text):
         self.wrong_message.setText(text)
