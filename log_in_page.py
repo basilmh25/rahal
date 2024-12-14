@@ -18,7 +18,7 @@ class window(qtw.QTabWidget):
         self.font_log.setBold(True)
         self.user_box=qtw.QLineEdit(self)
         self.user_box.setGeometry(440,201,318,54)
-        self.user_box.setPlaceholderText("  user name")
+        self.user_box.setPlaceholderText("  Email")
         self.user_box.setStyleSheet("background:#f6f6f6;color:#000000; border-radius:15")
         self.user_box.setFont(self.font_log)
         
@@ -63,12 +63,7 @@ class window(qtw.QTabWidget):
             self.parent.setCurrentWidget(self.parent.home_page)          
         else:
             self.la.setText("sorry we don't recognize this account")
-        # print(user)
+                    
     def signup_def(self):
         self.parent.resize(800,800)
         self.parent.setCurrentWidget(self.parent.signup_page)
-
-# app =qtw.QApplication(sys.argv)
-# main = window()
-# main.show()
-# sys.exit(app.exec_())
