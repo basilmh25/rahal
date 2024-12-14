@@ -16,7 +16,8 @@ class home_page(qtw.QTabWidget):
         self.mycar_button=qtw.QPushButton(self)
         self.mycar_button.setGeometry(507,626,182,91)
         self.mycar_button.setStyleSheet("background-image:url(source/my car); border-radius: 19")
-        
+        self.mycar_button.clicked.connect(self.mycar_def)
+
         self.account_button=qtw.QPushButton(self)
         self.account_button.setGeometry(910,459,182,91)
         self.account_button.setStyleSheet("background-image:url(source/account); border-radius: 19")
@@ -44,4 +45,7 @@ class home_page(qtw.QTabWidget):
     
     def account_def(self):
         self.parent.setCurrentWidget(self.parent.account_page)
+
+    def mycar_def(self):
+        self.parent.setCurrentWidget(self.parent.no_car)
 
