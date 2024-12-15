@@ -2,6 +2,7 @@ import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 import sys
 import user as data
+import person
 
 class window(qtw.QTabWidget):
     def __init__(self,parent):
@@ -60,7 +61,18 @@ class window(qtw.QTabWidget):
         bass=self.pass_box.text()  
         if data.Log_in(user,bass):
             self.parent.resize(1600,950)
-            self.parent.setCurrentWidget(self.parent.home_page)          
+            self.parent.setCurrentWidget(self.parent.home_page)
+            list = data.get_data_user(user)
+            # obj = person.Person(list[0], list[1], list[2], list[3], list[4], list[5], list[6])
+            self.parent.cmail.set_first_name(list[0])
+            self.parent.home_page.hiname.setText(list[0])
+            self.parent.cmail.set_last_name(list[1])
+            self.parent.cmail.set_email(list[2])
+            self.parent.cmail.set_password(list[3])
+            self.parent.cmail.set_phone(list[4])
+            self.parent.cmail.set_current_car(list[5])
+            self.parent.cmail.set_past_car(list[6])
+
         else:
             self.la.setText("sorry we don't recognize this account")
                     

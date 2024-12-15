@@ -6,12 +6,14 @@ import sign_up_page
 import home_page
 import account_page
 import nocar_page
+import person
 
 class app(qtw.QStackedWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("rahal")
         self.setGeometry(100,200,800,600)
+        self.cmail=person.Person()
         #pages
         self.login_page = log_in_page.window(self)
         self.signup_page=sign_up_page.signup(self)
@@ -24,6 +26,7 @@ class app(qtw.QStackedWidget):
         self.addWidget(self.account_page)
         self.addWidget(self.no_car)
         self.setCurrentWidget(self.login_page)
+
         
 
 exe=qtw.QApplication(sys.argv)

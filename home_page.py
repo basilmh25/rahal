@@ -2,6 +2,7 @@ import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 import sys
 import user as data
+import person
 
 class home_page(qtw.QTabWidget):
     def __init__(self, parent) :
@@ -34,7 +35,8 @@ class home_page(qtw.QTabWidget):
         self.fontbox.setBold(True)
 
         self.hiname=qtw.QLabel(self)
-        self.hiname.setText("Mohamed")
+        self.hiname.setText(self.parent.cmail.get_frist_name())
+        print(self.parent.cmail.get_frist_name())
         self.hiname.setGeometry(529,66,831,137)
         self.hiname.setFont(self.fontbox)
         self.hiname.setStyleSheet("background:white;color:#0855ff")

@@ -4,7 +4,7 @@ cursor = con.cursor()
 
 cursor.execute(""" 
         CREATE TABLE IF NOT EXISTS Cars (
-        car_id INTEGER PRIMARY KEY AUTOINCREMENT,  
+        car_id INTEGER PRIMARY KEY AUTOINCREMENT, 
         model TEXT NOT NULL UNIQUE,                       
         manufacturer TEXT NOT NULL UNIQUE,               
         year_of_manufacture INTEGER NOT NULL,     

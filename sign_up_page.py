@@ -3,6 +3,7 @@ import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 import sys
 import user as data
+import person
 
 class signup(qtw.QTabWidget):
     def __init__(self, parent):
@@ -89,6 +90,16 @@ class signup(qtw.QTabWidget):
                             data.Add_User(fname, email, password, lname, phone)
                             self.parent.resize(1600,950)
                             self.parent.setCurrentWidget(self.parent.home_page)
+                            list = data.get_data_user(email)
+                            self.parent.home_page.hiname.setText(list[0])
+                            self.parent.cmail.set_first_name(list[0])
+                            self.parent.cmail.set_last_name(list[1])
+                            self.parent.cmail.set_email(list[2])
+                            self.parent.cmail.set_password(list[3])
+                            self.parent.cmail.set_phone(list[4])
+                            self.parent.cmail.set_current_car(list[5])
+                            self.parent.cmail.set_past_car(list[6])
+                            
                         
                         else:
                             self.m_wrong("Phone is Empty!")
