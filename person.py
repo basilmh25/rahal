@@ -6,7 +6,7 @@ class Person:
         self.first_name = None
         self.last_name = None
         self.email = None
-        self.password = None
+        self.Pass = None
         self.phone = None
         self.current_car = None
         self.past_car = None
@@ -44,4 +44,4 @@ class Person:
     def get_current_car(self):
         return self.current_car
     def get_password(self):
-        return self.password
+        return self.Pass

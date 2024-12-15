@@ -2,7 +2,7 @@ import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 import sys
 import user as data
-
+import person
 class account_page(qtw.QTabWidget):
     def __init__(self, parent) :
         super().__init__(parent)
@@ -86,11 +86,11 @@ class account_page(qtw.QTabWidget):
         self.pass_box.setFont(self.fontbox)
         self.pass_box.setStyleSheet("background:#f6f6f6;color:#000000; border-radius:16")
 
-        self.fname_lab.setText("False text")
-        self.lname_lab.setText("False text")
-        self.email_lab.setText("False text")
-        self.phone_lab.setText("False text")
-        self.pass_lab.setText("False text")
+        self.fname_lab.setText(self.parent.cmail.get_frist_name())
+        self.lname_lab.setText(self.parent.cmail.get_last_name())
+        self.email_lab.setText(self.parent.cmail.get_email())
+        self.phone_lab.setText(self.parent.cmail.get_phone())
+        self.pass_lab.setText(self.parent.cmail.get_password())
 
         self.fname_box.setVisible(False)
         self.lname_box.setVisible(False)
@@ -116,7 +116,7 @@ class account_page(qtw.QTabWidget):
         self.phone_box.setText(self.phone_lab.text())
         self.pass_box.setText(self.pass_lab.text())
         self.save_button.setVisible(True)
-
+        
     def save_def(self):
         self.fname_box.setVisible(False)
         self.lname_box.setVisible(False)
@@ -124,3 +124,8 @@ class account_page(qtw.QTabWidget):
         self.phone_box.setVisible(False)
         self.pass_box.setVisible(False)
         self.save_button.setVisible(False)
+        self.fname_lab.setText(self.fname_box.text())
+        self.lname_lab.setText(self.lname_box.text())
+        self.email_lab.setText(self.email_box.text())
+        self.phone_lab.setText(self.phone_box.text())
+        self.pass_lab.setText(self.pass_box.text())

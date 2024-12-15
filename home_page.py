@@ -31,7 +31,7 @@ class home_page(qtw.QTabWidget):
 
         self.fontbox = qtg.QFont()
         self.fontbox.setFamily("Roboto")
-        self.fontbox.setPointSize(130)
+        self.fontbox.setPointSize(120)
         self.fontbox.setBold(True)
 
         self.hiname=qtw.QLabel(self)
