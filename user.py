@@ -66,39 +66,40 @@ def check_email(email):
 
 
 # Update first name -> used by send the new name and send email
-def Update_firstname(email, new_name = ""):
+def Update_firstname(email, new_name):
     with sqlite3.connect("DataBase.db") as con:
         cursor = con.cursor()
-        if len(new_name) != 0:
-            cursor.execute("UPDATE users SET firstname = ? WHERE email = ? ", (new_name, email))
+        cursor.execute("UPDATE users SET firstname = ? WHERE email = ? ", (new_name, email))
 
 
 # Update last name -> used by send the new name and send email
-def Update_lastname(email, new_name = ""):
+def Update_lastname(email, new_name):
     with sqlite3.connect("DataBase.db") as con:
         cursor = con.cursor()
-        if len(new_name) != 0:
-            cursor.execute("UPDATE users SET lastname = ? WHERE email = ? ", (new_name, email))
+        cursor.execute("UPDATE users SET lastname = ? WHERE email = ? ", (new_name, email))
 
+
+def Update_email(email, new_email):
+    with sqlite3.connect("DataBase.db") as con:
+        cursor = con.cursor()
+        cursor.execute("UPDATE users SET email = ? WHERE email = ? ", (new_email, email))
 
 # Update password name -> used by send the new password and send email
-def Update_password(email, new_password = "" ):
+def Update_password(email, new_password):
     with sqlite3.connect("DataBase.db") as con:
         cursor = con.cursor()
-        if len(new_password) != 0:
-            cursor.execute("UPDATE users SET password = ? WHERE email = ? ", (new_password, email))
+        cursor.execute("UPDATE users SET password = ? WHERE email = ? ", (new_password, email))
 
 
 # Update phone name -> used by send the new phone and send email
-def Update_phone(email, new_phone = ""):
+def Update_phone(email, new_phone):
     with sqlite3.connect("DataBase.db") as con:
         cursor = con.cursor()
-        if len(new_phone) != 0:
-            cursor.execute("UPDATE users SET phone = ? WHERE email = ? ", (new_phone, email))
+        cursor.execute("UPDATE users SET phone = ? WHERE email = ? ", (new_phone, email))
 
 
 # convert the value current_car into value past_car -> used by send email and id new car
-def Update_Current_car(email, id_car = ""):
+def Update_Current_car(email, id_car):
     with sqlite3.connect("DataBase.db") as con:
         cursor = con.cursor()
         if len(id_car) != 0:

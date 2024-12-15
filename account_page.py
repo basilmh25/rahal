@@ -101,6 +101,7 @@ class account_page(qtw.QTabWidget):
         self.parent.setCurrentWidget(self.parent.home_page)
     
     def delete_def(self):
+        data.Delete_user(self.parent.cmail.get_email())
         self.parent.resize(800,600)
         self.parent.setCurrentWidget(self.parent.login_page)
     
@@ -129,3 +130,14 @@ class account_page(qtw.QTabWidget):
         self.email_lab.setText(self.email_box.text())
         self.phone_lab.setText(self.phone_box.text())
         self.pass_lab.setText(self.pass_box.text())
+        self.parent.cmail.set_first_name(self.fname_box.text())
+        self.parent.cmail.set_last_name(self.lname_box.text())
+        self.parent.cmail.set_phone(self.phone_box.text())
+        self.parent.cmail.set_password(self.pass_box.text())
+        data.Update_firstname(self.parent.cmail.get_email(),self.fname_box.text())
+        data.Update_lastname(self.parent.cmail.get_email(),self.lname_box.text())
+        data.Update_password(self.parent.cmail.get_email(),self.pass_box.text())
+        data.Update_phone(self.parent.cmail.get_email(),self.phone_box.text())
+        data.Update_email(self.parent.cmail.get_email(),self.email_box.text())
+        self.parent.cmail.set_email(self.email_box.text())
+
