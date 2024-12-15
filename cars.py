@@ -1,11 +1,11 @@
 import sqlite3 
-con=sqlite3.connect("DataBase.dp")
+con=sqlite3.connect("DataBase.db")
 cursor = con.cursor()
 
 cursor.execute(""" 
-        CREATE TABLE IF NOT EXISTS Cars (
-        car_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        model TEXT NOT NULL UNIQUE,                     
+        CREATE TABLE IF NOT EXISTS Car (
+        car_id INTEGER PRIMARY KEY AUTOINCREMENT,  
+        model TEXT NOT NULL UNIQUE,                       
         manufacturer TEXT NOT NULL UNIQUE,               
         year_of_manufacture INTEGER NOT NULL,     
         engine_size FLOAT ,              
@@ -24,19 +24,25 @@ cursor.execute("""
         rental_status BOOLEAN ,           
         rental_until DATE,                        
         price INTEGER ,                   
-        features TEXT, 
+        features TEXT                               
         )
     """)
 con.commit()
 con.close()
 
+def get_data_car(model):
+    with sqlite3.connect("DataBase.db") as con:
+        cursor = con.cursor()
+        d = cursor.execute("SELECT * FROM car where model = ?", (model,))
+        data = d.fetchone()
+        return list(data[1:])
 
 
 #Add The Data In The Table  ->None It means NO Peroble If Not Add  
 def Add_Car(model, manufacturer, year_of_manufacture, engine_size=None, horsepower=None, top_speed=None, 
             acceleration=None, number_of_doors=None, number_of_seats=None, fuel_capacity=None, drivetrain=None, 
             gearbox_type=None, safety_rating=None, satisfy_rating=None, rental_history=None, tenant_count=None, 
-            rental_status=None, rental_until=None, price=None, features=None, satisfaction_rating=None):
+            rental_status=None, rental_until=None, price=None, features=None):
       
       if not model or not manufacturer or not year_of_manufacture:
           print("Error:The model or manufacture or year_manufacture isn't exist")
@@ -59,7 +65,6 @@ def Add_Car(model, manufacturer, year_of_manufacture, engine_size=None, horsepow
       satisfy_rating = satisfy_rating if satisfy_rating is not None else 0
       price = price if price is not None else 0
       tenant_count = tenant_count if tenant_count is not None else 0
-      satisfaction_rating=satisfaction_rating if satisfaction_rating is not None else 0
       rental_history=rental_history if rental_history is not None else True
       rental_status=rental_status if rental_status is not None else True
       features=features if features is not None else ''
@@ -68,27 +73,29 @@ def Add_Car(model, manufacturer, year_of_manufacture, engine_size=None, horsepow
       gearbox_type=gearbox_type if gearbox_type is not None else ''
 
 
-      with sqlite3.connect("Car_Database.dp") as con:
+      with sqlite3.connect("DataBase.db") as con:
         cursor = con.cursor()
         try:
            cursor.execute("""
-              INSERT INTO Cars (
+              INSERT INTO Car (
                   model, manufacturer, year_of_manufacture, engine_size, horsepower, top_speed, acceleration,
                   number_of_doors, number_of_seats, fuel_capacity, drivetrain, gearbox_type, safety_rating,
-                  satisfy_rating, rental_history, tenant_count, rental_status, rental_until, price, features, satisfaction_rating
-                  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)""",
+                  satisfy_rating, rental_history, tenant_count, rental_status, rental_until, price, features
+                  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)""",
                  (model, manufacturer, year_of_manufacture, engine_size, horsepower, top_speed, acceleration,
                   number_of_doors, number_of_seats, fuel_capacity, drivetrain, gearbox_type, safety_rating,
-                  satisfy_rating, rental_history, tenant_count, rental_status, rental_until, price, features, satisfaction_rating))
+                  satisfy_rating, rental_history, tenant_count, rental_status, rental_until, price, features))
+           con.commit()
+           
         except sqlite3.Error as e:
             print(f"Error: The car Add is fail becouse {e} ")
 
 
 #Delete The Car
 def Delete_Car(model):
-    with sqlite3.connect("Car_Database.dp") as con:
+    with sqlite3.connect("DataBase.db") as con:
         cursor = con.cursor()
-        cursor.execute("SELECT *FROM Cars WHERE model = ?", (model,))
+        cursor.execute("SELECT *FROM Car WHERE model = ?", (model,))
         car=cursor.fetchall()
         if not car :
             print(f"No car found with model {model} to delete.")
@@ -103,9 +110,9 @@ def Delete_Car(model):
 
 #Show The Data of The Car  
 def Show_all_data_of_car(model):
-    with sqlite3.connect("Car_Database.dp") as con:
+    with sqlite3.connect("DataBase.db") as con:
         cursor = con.cursor()
-        cursor.execute("SELECT *FROM Cars WHERE model = ?", (model,))
+        cursor.execute("SELECT *FROM Car WHERE model = ?", (model,))
         description = cursor.fetchall() 
         try: 
          if description :
@@ -123,9 +130,9 @@ def Show_all_data_of_car(model):
             print(f"Error: The Show Data fail becouse {e}  ")
 
 def Show_all_cars_of_table():
-    with sqlite3.connect("Car_Database.dp") as con:
+    with sqlite3.connect("DataBase.db") as con:
         cursor = con.cursor()
-        cursor.execute("SELECT *FROM Cars")
+        cursor.execute("SELECT *FROM Car")
         data = cursor.fetchall() 
         try: 
          if  data :
@@ -147,12 +154,12 @@ def Show_all_cars_of_table():
 #update all
 def Update_all(model,name_column,new_value):
  
-    with sqlite3.connect("Car_Database.dp") as con:
+    with sqlite3.connect("DataBase.db") as con:
        cursor = con.cursor()
        All_Coulmns=[ "model", "manufacturer", "year_of_manufacture", "engine_size", "horsepower", 
                      "top_speed", "acceleration", "number_of_doors", "number_of_seats", "fuel_capacity",
                      "drivetrain", "gearbox_type", "safety_rating", "satisfy_rating", "rental_history",
-                     "tenant_count", "rental_status", "rental_until", "price", "features", "satisfaction_rating"]
+                     "tenant_count", "rental_status", "rental_until", "price", "features"]
  
  
        if name_column not in All_Coulmns:
@@ -163,13 +170,7 @@ def Update_all(model,name_column,new_value):
             return
        else:      
          try:
-            cursor.execute(f"UPDATE Cars SET {name_column} = ? WHERE model = ? ", (new_value,model)) 
+            cursor.execute(f"UPDATE Car SET {name_column} = ? WHERE model = ? ", (new_value,model)) 
             print(f"The value of coulmn {name_column} was successfully update")
          except sqlite3.Error as e:
             print(f"Error: The update fail becouse {e} ")
-
-
-Add_Car("gfgfgfg","fggfg",22222)
-Add_Car("fgdgfjk","dfs",5555)
-Show_all_data_of_car("gfgfgfg")
-Show_all_cars_of_table()
