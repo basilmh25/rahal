@@ -72,6 +72,11 @@ class window(qtw.QTabWidget):
             self.parent.cmail.set_phone(list[4])
             self.parent.cmail.set_current_car(list[5])
             self.parent.cmail.set_past_car(list[6])
+            self.parent.account_page.fname_lab.setText(self.parent.cmail.get_frist_name())
+            self.parent.account_page.lname_lab.setText(self.parent.cmail.get_last_name())
+            self.parent.account_page.email_lab.setText(self.parent.cmail.get_email())
+            self.parent.account_page.phone_lab.setText(self.parent.cmail.get_phone())
+            self.parent.account_page.pass_lab.setText(self.parent.cmail.get_password())
 
         else:
             self.la.setText("sorry we don't recognize this account")
