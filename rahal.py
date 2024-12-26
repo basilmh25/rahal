@@ -7,6 +7,7 @@ import home_page
 import account_page
 import nocar_page
 import person
+import rent_page
 
 class app(qtw.QStackedWidget):
     def __init__(self):
@@ -20,11 +21,13 @@ class app(qtw.QStackedWidget):
         self.home_page= home_page.home_page(self)
         self.account_page= account_page.account_page(self)
         self.no_car=nocar_page.nocar_page(self)
+        self.rent_page=rent_page.rent_page(self)
         self.addWidget(self.login_page)
         self.addWidget(self.signup_page)
         self.addWidget(self.home_page)
         self.addWidget(self.account_page)
         self.addWidget(self.no_car)
+        self.addWidget(self.rent_page)
         self.setCurrentWidget(self.login_page)
 
         

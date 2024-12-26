@@ -99,11 +99,23 @@ class account_page(qtw.QTabWidget):
         self.pass_box.setVisible(False)
     def back_def(self):
         self.parent.setCurrentWidget(self.parent.home_page)
+        self.fname_box.setVisible(False)
+        self.lname_box.setVisible(False)
+        self.email_box.setVisible(False)
+        self.phone_box.setVisible(False)
+        self.pass_box.setVisible(False)
+        self.save_button.setVisible(False)
     
     def delete_def(self):
         data.Delete_user(self.parent.cmail.get_email())
         self.parent.resize(800,600)
         self.parent.setCurrentWidget(self.parent.login_page)
+        self.fname_box.setVisible(False)
+        self.lname_box.setVisible(False)
+        self.email_box.setVisible(False)
+        self.phone_box.setVisible(False)
+        self.pass_box.setVisible(False)
+        self.save_button.setVisible(False)
     
     def edit_def(self):
         self.fname_box.setVisible(True)

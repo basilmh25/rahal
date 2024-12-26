@@ -13,6 +13,7 @@ class home_page(qtw.QTabWidget):
         self.rentcar_button=qtw.QPushButton(self)
         self.rentcar_button.setGeometry(507,459,182,91)
         self.rentcar_button.setStyleSheet("background-image:url(source/rent car); border-radius: 19")
+        self.rentcar_button.clicked.connect(self.rentcar_def)
         
         self.mycar_button=qtw.QPushButton(self)
         self.mycar_button.setGeometry(507,626,182,91)
@@ -50,4 +51,7 @@ class home_page(qtw.QTabWidget):
 
     def mycar_def(self):
         self.parent.setCurrentWidget(self.parent.no_car)
+
+    def rentcar_def(self):
+        self.parent.setCurrentWidget(self.parent.rent_page)
 
