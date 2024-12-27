@@ -63,7 +63,6 @@ class window(qtw.QTabWidget):
             self.parent.resize(1600,950)
             self.parent.setCurrentWidget(self.parent.home_page)
             list = data.get_data_user(user)
-            # obj = person.Person(list[0], list[1], list[2], list[3], list[4], list[5], list[6])
             self.parent.cmail.set_first_name(list[0])
             self.parent.home_page.hiname.setText(list[0])
             self.parent.cmail.set_last_name(list[1])

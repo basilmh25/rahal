@@ -37,7 +37,6 @@ class home_page(qtw.QTabWidget):
 
         self.hiname=qtw.QLabel(self)
         self.hiname.setText(self.parent.cmail.get_frist_name())
-        print(self.parent.cmail.get_frist_name())
         self.hiname.setGeometry(529,66,831,137)
         self.hiname.setFont(self.fontbox)
         self.hiname.setStyleSheet("background:white;color:#0855ff")
