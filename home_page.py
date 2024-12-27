@@ -3,6 +3,7 @@ import PyQt5.QtGui as qtg
 import sys
 import user as data
 import person
+import car
 
 class home_page(qtw.QTabWidget):
     def __init__(self, parent) :
@@ -49,7 +50,16 @@ class home_page(qtw.QTabWidget):
         self.parent.setCurrentWidget(self.parent.account_page)
 
     def mycar_def(self):
-        self.parent.setCurrentWidget(self.parent.no_car)
+        if self.parent.cmail.get_current_car() is not None:
+            x=self.parent.rent_page.carss
+            ind=0
+            for i in range(30):
+                if x[i].Get_Model()==self.parent.cmail.get_current_car():
+                    ind=i  
+            self.parent.state_page2.refresh(car.car.get_all_data_car(self.parent.rent_page.carss[ind]))
+            self.parent.setCurrentWidget(self.parent.state_page2)
+        else:
+            self.parent.setCurrentWidget(self.parent.no_car)    
 
     def rentcar_def(self):
         self.parent.setCurrentWidget(self.parent.rent_page)

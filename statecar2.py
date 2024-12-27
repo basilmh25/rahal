@@ -5,14 +5,13 @@ import user as data
 import person
 import cars
 import car
-import datetime
 
 class state_page(qtw.QTabWidget):
     def __init__(self, parent) :
         super().__init__(parent)
         self.parent=parent
         self.setGeometry(100,200,1600,950)
-        self.setStyleSheet("background-image:url(source/car state.png)")
+        self.setStyleSheet("background-image:url(source/car state1.png)")
         
         self.back_button=qtw.QPushButton(self)
         self.back_button.setStyleSheet("background-image:url(source/back); border-radius: 16")
@@ -27,15 +26,6 @@ class state_page(qtw.QTabWidget):
         self.fontbox.setPointSize(30)
         self.fontbox.setBold(True)
 
-        self.count_days=qtw.QLineEdit(self)
-        self.count_days.setGeometry(678,806,152,82)
-        self.count_days.setStyleSheet("color:black;background:white;border-radius: 16")
-        self.count_days.setFont(self.fontbox)
-
-        self.rent_button=qtw.QPushButton(self)
-        self.rent_button.setGeometry(991,806,260,82)
-        self.rent_button.setStyleSheet("background-image:url(source/rent state.png);;border-radius: 16")
-        self.rent_button.clicked.connect(self.rent_def)
         self.arrt=[]
         for x in range(14):
             temp=qtw.QLabel(self)
@@ -65,16 +55,7 @@ class state_page(qtw.QTabWidget):
         
 
     def back_def(self):
-        self.parent.setCurrentWidget(self.parent.rent_page)
+        self.parent.setCurrentWidget(self.parent.home_page)
 
-    def rent_def(self):
-        # if self.arrt[13] == "None":
-        # if self.parent.cmail.get_current_car() is None:
-            temp = self.arrt[0].text().split()[1]
-            self.parent.cmail.set_current_car(temp)
-            data.Update_Current_car(self.parent.cmail.get_email(),temp)
-            self.parent.setCurrentWidget((self.parent.home_page))
-            tempday=int(self.count_days.text())
-            x = datetime.date.today() + datetime.timedelta(days=tempday)
-            cars.Update_all("Civic", "Rental_To", x.strftime("%Y-%m-%d"))
-            self.parent.setCurrentWidget(self.parent.home_page)
+   
+

@@ -10,6 +10,7 @@ import person
 import rent_page
 import statecar
 import cars
+import statecar2
 
 class app(qtw.QStackedWidget):
     def __init__(self):
@@ -25,6 +26,7 @@ class app(qtw.QStackedWidget):
         self.no_car=nocar_page.nocar_page(self)
         self.rent_page=rent_page.rent_page(self)
         self.state_page=statecar.state_page(self)
+        self.state_page2=statecar2.state_page(self)
         # self.carss = cars.get_data_car()
         
 
@@ -35,6 +37,7 @@ class app(qtw.QStackedWidget):
         self.addWidget(self.no_car)
         self.addWidget(self.rent_page)
         self.addWidget(self.state_page)
+        self.addWidget(self.state_page2)
         self.setCurrentWidget(self.login_page)
 
         

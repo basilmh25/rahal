@@ -1,5 +1,6 @@
 import sqlite3 
 import car
+import datetime
 con=sqlite3.connect("DataBase.db")
 cursor = con.cursor()
 
@@ -24,7 +25,7 @@ cursor.execute("""
         Hental_History BOOLEAN,                  
         Tenant_Count INTEGER,                     
         Rental_Status BOOLEAN ,           
-        Rental_To DATE,                        
+        Rental_To DATE,
         Features TEXT                         
         )
     """)
@@ -121,13 +122,9 @@ def Update_all(Model,name_column,new_value):
         if name_column not in All_Coulmns:
             print(f"The {name_column} is not exist in All_Columns ")
             return
-        elif new_value==None:
-            print(f"Error: The  new_value for {name_column} can not be {new_value} ")
-            return
         else:      
             try:
                 cursor.execute(f"UPDATE Car SET {name_column} = ? WHERE Model = ? ", (new_value,Model)) 
-                print(f"The value of coulmn {name_column} was successfully update")
             except sqlite3.Error as e:
                 print(f"Error: The update fail becouse {e} ")
 
@@ -167,3 +164,18 @@ def get_data_car():
         
         return list_frame
 
+
+
+def Compare_date():
+    with sqlite3.connect("DataBase.db") as con:
+        cursor = con.cursor()
+        d = cursor.execute("SELECT Model, Rental_To FROM Car")
+        date = d.fetchall()
+        for a in date:
+            if not a[1]: continue
+            temp = datetime.datetime.now().strftime("%Y-%m-%d")
+            if a[1] < temp:
+                Update_all(a[0], "Rental_To", None)
+
+
+Compare_date()
