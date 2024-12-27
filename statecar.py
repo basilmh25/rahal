@@ -75,6 +75,8 @@ class state_page(qtw.QTabWidget):
             data.Update_Current_car(self.parent.cmail.get_email(),temp)
             self.parent.setCurrentWidget((self.parent.home_page))
             tempday=int(self.count_days.text())
+            
             x = datetime.date.today() + datetime.timedelta(days=tempday)
-            cars.Update_all("Civic", "Rental_To", x.strftime("%Y-%m-%d"))
+            self.arrt[13].setText(x.strftime("%Y-%m-%d"))
+            cars.Update_all(temp , "Rental_To", x.strftime("%Y-%m-%d"))
             self.parent.setCurrentWidget(self.parent.home_page)

@@ -4,6 +4,7 @@ import sys
 import user as data
 import person
 import car
+import cars
 
 class home_page(qtw.QTabWidget):
     def __init__(self, parent) :
@@ -50,7 +51,10 @@ class home_page(qtw.QTabWidget):
         self.parent.setCurrentWidget(self.parent.account_page)
 
     def mycar_def(self):
+
         if self.parent.cmail.get_current_car() is not None:
+            self.carss = cars.get_data_car()
+            self.parent.rent_page.car_generate(self.carss)
             x=self.parent.rent_page.carss
             ind=0
             for i in range(30):
@@ -62,5 +66,8 @@ class home_page(qtw.QTabWidget):
             self.parent.setCurrentWidget(self.parent.no_car)    
 
     def rentcar_def(self):
+        self.carss = cars.get_data_car()
+        self.parent.rent_page.car_generate(self.carss)
         self.parent.setCurrentWidget(self.parent.rent_page)
+
 
